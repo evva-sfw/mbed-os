@@ -220,7 +220,7 @@ enum ble_error_t {
 /**
  * Default MTU size.
  */
-static const unsigned BLE_GATT_MTU_SIZE_DEFAULT = 23;
+static const unsigned BLE_GATT_MTU_SIZE_DEFAULT = 517;
 
 /**
  * Handle Value Notification/Indication event.
