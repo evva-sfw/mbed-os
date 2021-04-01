@@ -29,6 +29,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *******************************************************************************
  */
+
+/* MBED TARGET LIST: UHURU_RAVEN */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -157,8 +160,8 @@ typedef enum {
     BUTTON1 = USER_BUTTON,
     SERIAL_TX   = STDIO_UART_TX, // Virtual Com Port
     SERIAL_RX   = STDIO_UART_RX, // Virtual Com Port
-    USBTX       = STDIO_UART_TX, // Virtual Com Port
-    USBRX       = STDIO_UART_RX, // Virtual Com Port
+    CONSOLE_TX       = STDIO_UART_TX, // Virtual Com Port
+    CONSOLE_RX       = STDIO_UART_RX, // Virtual Com Port
     I2C_SCL     = PB_8,
     I2C_SDA     = PB_9,
     SPI_MOSI    = PE_14,

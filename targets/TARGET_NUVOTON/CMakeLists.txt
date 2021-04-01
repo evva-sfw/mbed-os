@@ -3,7 +3,6 @@
 
 add_library(mbed-nuvoton INTERFACE)
 
-add_subdirectory(TARGET_M2351 EXCLUDE_FROM_ALL)
 add_subdirectory(TARGET_M251 EXCLUDE_FROM_ALL)
 add_subdirectory(TARGET_M261 EXCLUDE_FROM_ALL)
 add_subdirectory(TARGET_M451 EXCLUDE_FROM_ALL)
@@ -23,3 +22,6 @@ target_sources(mbed-nuvoton
         nu_timer.c
         USBEndpoints_Nuvoton.cpp
 )
+
+target_link_libraries(mbed-nuvoton INTERFACE mbed-cmsis-cortex-m)
+

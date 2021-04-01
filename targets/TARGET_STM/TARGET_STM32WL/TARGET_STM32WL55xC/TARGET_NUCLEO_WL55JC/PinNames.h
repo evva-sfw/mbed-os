@@ -15,6 +15,8 @@
  * Automatically generated from STM32CubeMX/db/mcu/STM32WL55JCIx.xml
  */
 
+/* MBED TARGET LIST: NUCLEO_WL55JC */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -127,8 +129,8 @@ typedef enum {
     STDIO_UART_RX = PA_3,
 #endif
 
-    USBTX = STDIO_UART_TX, // used for greentea tests
-    USBRX = STDIO_UART_RX, // used for greentea tests
+    CONSOLE_TX = STDIO_UART_TX, // used for greentea tests
+    CONSOLE_RX = STDIO_UART_RX, // used for greentea tests
 
     // I2C signals aliases
     I2C_SDA = D14,

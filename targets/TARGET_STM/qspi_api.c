@@ -258,7 +258,9 @@ qspi_status_t qspi_prepare_command(const qspi_command_t *command, QSPI_CommandTy
     // these are target specific settings, use default values
     st_command->SIOOMode = QSPI_SIOO_INST_EVERY_CMD;
     st_command->DdrMode = QSPI_DDR_MODE_DISABLE;
+#if defined(QSPI_DDR_HHC_ANALOG_DELAY)
     st_command->DdrHoldHalfCycle = QSPI_DDR_HHC_ANALOG_DELAY;
+#endif
 
     if (command->address.disabled == true) {
         st_command->AddressMode = QSPI_ADDRESS_NONE;
@@ -654,13 +656,13 @@ qspi_status_t qspi_free(qspi_t *obj)
     }
 #endif
 
-    // Configure GPIOs
-    pin_function(obj->io0, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io1, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io2, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io3, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->sclk, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->ssel, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
+    // Configure GPIOs back to reset value
+    pin_function(obj->io0, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io1, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io2, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io3, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->sclk, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->ssel, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
 
     (void)(obj);
     return QSPI_STATUS_OK;
@@ -689,12 +691,12 @@ qspi_status_t qspi_free(qspi_t *obj)
     __HAL_RCC_QSPI_CLK_DISABLE();
 
     // Configure GPIOs
-    pin_function(obj->io0, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io1, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io2, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->io3, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->sclk, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
-    pin_function(obj->ssel, STM_PIN_DATA(STM_MODE_INPUT, GPIO_NOPULL, 0));
+    pin_function(obj->io0, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io1, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io2, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->io3, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->sclk, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
+    pin_function(obj->ssel, STM_PIN_DATA(STM_MODE_ANALOG, GPIO_NOPULL, 0));
 
     (void)(obj);
     return QSPI_STATUS_OK;
@@ -800,10 +802,10 @@ qspi_status_t qspi_write(qspi_t *obj, const qspi_command_t *command, const void 
 
     st_command.NbData = *length;
 
-    if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
+    if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
         status = QSPI_STATUS_ERROR;
     } else {
-        if (HAL_QSPI_Transmit(&obj->handle, (uint8_t *)data, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
+        if (HAL_QSPI_Transmit(&obj->handle, (uint8_t *)data, HAL_QSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
             status = QSPI_STATUS_ERROR;
         }
     }
@@ -849,10 +851,10 @@ qspi_status_t qspi_read(qspi_t *obj, const qspi_command_t *command, void *data, 
 
     st_command.NbData = *length;
 
-    if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
+    if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
         status = QSPI_STATUS_ERROR;
     } else {
-        if (HAL_QSPI_Receive(&obj->handle, data, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
+        if (HAL_QSPI_Receive(&obj->handle, data, HAL_QSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
             status = QSPI_STATUS_ERROR;
         }
     }
@@ -920,7 +922,7 @@ qspi_status_t qspi_command_transfer(qspi_t *obj, const qspi_command_t *command, 
 
         st_command.NbData = 1;
         st_command.DataMode = QSPI_DATA_NONE; /* Instruction only */
-        if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
+        if (HAL_QSPI_Command(&obj->handle, &st_command, HAL_QSPI_TIMEOUT_DEFAULT_VALUE) != HAL_OK) {
             status = QSPI_STATUS_ERROR;
             return status;
         }

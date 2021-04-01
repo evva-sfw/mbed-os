@@ -28,6 +28,8 @@
  *******************************************************************************
  */
 
+/* MBED TARGET LIST: DISCO_F429ZI */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -241,8 +243,8 @@ typedef enum {
     BUTTON1 = USER_BUTTON,
     SERIAL_TX   = STDIO_UART_TX,
     SERIAL_RX   = STDIO_UART_RX,
-    USBTX       = STDIO_UART_TX,
-    USBRX       = STDIO_UART_RX,
+    CONSOLE_TX       = STDIO_UART_TX,
+    CONSOLE_RX       = STDIO_UART_RX,
     SPI_MOSI    = PA_7,
     SPI_MISO    = PA_6,
     SPI_SCK     = PA_5,

@@ -15,6 +15,8 @@
  * Automatically generated from STM32CubeMX/db/mcu/STM32G031K(4-6-8)Tx.xml
  */
 
+/* MBED TARGET LIST: NUCLEO_G031K8 */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -123,8 +125,8 @@ typedef enum {
 
     SERIAL_TX   = STDIO_UART_TX,
     SERIAL_RX   = STDIO_UART_RX,
-    USBTX       = STDIO_UART_TX,
-    USBRX       = STDIO_UART_RX,
+    CONSOLE_TX       = STDIO_UART_TX,
+    CONSOLE_RX       = STDIO_UART_RX,
     I2C_SCL     = PB_8,
     I2C_SDA     = PB_9,
     SPI_MOSI    = PA_7,

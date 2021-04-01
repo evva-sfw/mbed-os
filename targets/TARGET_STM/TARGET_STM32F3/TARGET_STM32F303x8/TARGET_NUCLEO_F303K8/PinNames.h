@@ -28,6 +28,8 @@
  *******************************************************************************
  */
 
+/* MBED TARGET LIST: NUCLEO_F303K8 */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -138,8 +140,8 @@ typedef enum {
     BUTTON1 = USER_BUTTON,
     SERIAL_TX   = STDIO_UART_TX,
     SERIAL_RX   = STDIO_UART_RX,
-    USBTX       = STDIO_UART_TX,
-    USBRX       = STDIO_UART_RX,
+    CONSOLE_TX       = STDIO_UART_TX,
+    CONSOLE_RX       = STDIO_UART_RX,
     I2C_SCL     = PB_6,
     I2C_SDA     = PB_7,
     SPI_MOSI    = PB_5,

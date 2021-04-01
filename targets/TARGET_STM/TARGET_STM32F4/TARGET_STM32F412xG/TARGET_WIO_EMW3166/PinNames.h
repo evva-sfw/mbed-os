@@ -14,6 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* MBED TARGET LIST: WIO_EMW3166 */
+
 #ifndef MBED_PINNAMES_H
 #define MBED_PINNAMES_H
 
@@ -238,8 +241,8 @@ typedef enum {
     STDIO_UART_RX = PB_7,
 #endif
     //DAPLink
-    USBRX      = STDIO_UART_RX,
-    USBTX      = STDIO_UART_TX,
+    CONSOLE_RX      = STDIO_UART_RX,
+    CONSOLE_TX      = STDIO_UART_TX,
     SWDIO      = P_26,
     SWCLK      = P_25,
     NTRST      = P_13,
